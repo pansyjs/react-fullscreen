@@ -1,0 +1,28 @@
+{
+  "name": "@pansy/react-fullscreen",
+  "version": "1.0.0",
+  "description": "react fullscreen component",
+  "main": "index.js",
+  "repository": "git@github.com:pansyjs/react-fullscreen.git",
+  "author": "wangxingkang <wang_xingkang@sensoro.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "pansy"
+  },
+  "peerDependencies": {
+    "react": ">=16.0.0",
+    "react-dom": ">=16.0.0"
+  },
+  "dependencies": {
+    "screenfull": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.17",
+    "@types/react-dom": "^16.9.4",
+    "@walrus/cli": "^0.4.1",
+    "@walrus/pansy": "^0.3.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "typescript": "^3.7.4"
+  }
+}
