@@ -10,11 +10,11 @@ interface FullScreenProps {
 }
 
 class FullScreen extends React.Component<FullScreenProps> {
-  private root: HTMLDivElement;
+  private root: HTMLDivElement | undefined;
 
   static defaultProps = {
     enabled: false
-  }
+  };
 
   static getDerivedStateFromProps(nextProps: FullScreenProps) {
     if ('enabled' in nextProps) {
@@ -23,8 +23,9 @@ class FullScreen extends React.Component<FullScreenProps> {
     return null;
   }
 
-  constructor(props) {
+  constructor(props: FullScreenProps) {
     super(props);
+    this.root = undefined;
   }
 
   componentDidMount() {
@@ -45,9 +46,7 @@ class FullScreen extends React.Component<FullScreenProps> {
     }
   }
 
-  componentDidUpdate() {
-
-  }
+  componentDidUpdate() {}
 
   componentWillUnmount() {
     const { video } = this.props;
@@ -69,19 +68,19 @@ class FullScreen extends React.Component<FullScreenProps> {
     if (screenfull.isEnabled) {
       onChange && onChange(screenfull.isFullscreen);
     }
-  }
+  };
 
   handleWebkitEndFullscreen = () => {
-    const { video } = this.props;
+    const { video } = this.props;
 
     if (video) {
       video.removeEventListener('webkitendfullscreen', this.handleWebkitEndFullscreen);
     }
   };
 
-  saveRoot = (node) => {
+  saveRoot = (node: HTMLDivElement) => {
     this.root = node;
-  }
+  };
 
   render() {
     const { enabled, children } = this.props;
@@ -95,13 +94,11 @@ class FullScreen extends React.Component<FullScreenProps> {
       <div
         ref={this.saveRoot}
         className={className.join(' ')}
-        style={
-          enabled ? { height: '100%', width: '100%' } : undefined
-        }
+        style={enabled ? { height: '100%', width: '100%' } : undefined}
       >
         {children}
       </div>
-    )
+    );
   }
 }
 
