@@ -12,12 +12,12 @@
   "author": "Pansy Team",
   "license": "MIT",
   "scripts": {
-    "build": "pansy",
+    "build": "pansy -w",
     "doc:dev": "father-doc dev",
     "prettier": "walrus prettier",
     "lint": "walrus lint",
     "lint:commit": "walrus commitlint --env HUSKY_GIT_PARAMS",
-    "prerelease": "yarn build",
+    "prerelease": "pansy",
     "release": "walrus release"
   },
   "peerDependencies": {

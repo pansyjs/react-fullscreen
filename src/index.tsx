@@ -5,8 +5,7 @@ interface FullScreenProps {
   video?: HTMLVideoElement;
   enabled: boolean;
   children?: ReactNode;
-  onError?: (error?: Error) => void;
-  onChange?: (enabled: boolean) => void;
+  onClose?: (error?: Error) => void;
 }
 
 class FullScreen extends React.Component<FullScreenProps> {
@@ -29,27 +28,39 @@ class FullScreen extends React.Component<FullScreenProps> {
   }
 
   componentDidMount() {
-    const { onChange, onError, video } = this.props;
+    this.handleScreenfull(this.props);
+  }
+
+  componentDidUpdate(nextProps: FullScreenProps) {
+    if (nextProps.enabled !== this.props.enabled) {
+      this.handleScreenfull(nextProps);
+    }
+  }
+
+  componentWillUnmount() {
+    this.closeScreenfull(this.props);
+  }
+
+  openScreenfull = (props: FullScreenProps) => {
+    const { onClose, video } = props;
 
     if (screenfull.isEnabled) {
       try {
         screenfull.request(this.root);
       } catch (error) {
-        onError && onError(error);
+        onClose && onClose(error);
       }
       screenfull.on('change', this.handleChange);
     } else if (video && video.webkitEnterFullscreen) {
       video.webkitEnterFullscreen();
       video.addEventListener('webkitendfullscreen', this.handleWebkitEndFullscreen);
     } else {
-      onChange && onChange(false);
+      onClose && onClose();
     }
-  }
+  };
 
-  componentDidUpdate() {}
-
-  componentWillUnmount() {
-    const { video } = this.props;
+  closeScreenfull = (props: FullScreenProps) => {
+    const { video } = props;
 
     if (screenfull.isEnabled) {
       try {
@@ -60,13 +71,21 @@ class FullScreen extends React.Component<FullScreenProps> {
       video.removeEventListener('webkitendfullscreen', this.handleWebkitEndFullscreen);
       video.webkitExitFullscreen();
     }
-  }
+  };
+
+  handleScreenfull = (props: FullScreenProps) => {
+    if (props.enabled) {
+      this.openScreenfull(props);
+    } else {
+      this.closeScreenfull(props);
+    }
+  };
 
   handleChange = () => {
-    const { onChange } = this.props;
+    const { onClose } = this.props;
 
-    if (screenfull.isEnabled) {
-      onChange && onChange(screenfull.isFullscreen);
+    if (screenfull.isEnabled && !screenfull.isFullscreen) {
+      onClose && onClose();
     }
   };
 

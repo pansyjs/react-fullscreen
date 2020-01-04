@@ -15,12 +15,12 @@ export default () => {
     setIsFull(!isFull);
   };
 
-  const handleFullScreenChange = (enabled) => {
-    setIsFull(enabled);
+  const handleCloseFullscreen = () => {
+    setIsFull(false);
   };
 
   return (
-    <FullScreen enabled={isFull} onChange={handleFullScreenChange}>
+    <FullScreen enabled={isFull} onClose={handleCloseFullscreen}>
       <div style={{ background: '#fff', height: '100%', width: '100%' }}>
         <button onClick={handleClick}>Hello World!</button>
       </div>
