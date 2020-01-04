@@ -1,6 +1,6 @@
 # React Fullscreen(React 全屏组件)
 
-[![Alita](https://img.shields.io/badge/alitajs-pansy%20utils-blue.svg)](https://github.com/alitajs)
+[![Alita](https://img.shields.io/badge/alitajs-react%20fullscreen-blue.svg)](https://github.com/alitajs)
 [![NPM version](https://img.shields.io/npm/v/@pansy/react-fullscreen.svg?style=flat)](https://npmjs.org/package@pansy/react-fullscreen)
 [![NPM downloads](http://img.shields.io/npm/dm/@pansy/react-fullscreen.svg?style=flat)](https://npmjs.org/package/@pansy/react-fullscreen)
 
