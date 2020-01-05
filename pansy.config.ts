@@ -2,6 +2,7 @@ import { Config } from '@walrus/pansy';
 
 const config: Config = {
   output: {
+    dir: 'lib',
     format: ['cjs', 'es']
   },
   externals: [

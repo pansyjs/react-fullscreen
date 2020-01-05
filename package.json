@@ -2,11 +2,11 @@
   "name": "@pansy/react-fullscreen",
   "version": "1.0.0",
   "description": "react fullscreen component",
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/index.d.ts",
   "files": [
-    "dist"
+    "lib"
   ],
   "repository": "git@github.com:pansyjs/react-fullscreen.git",
   "author": "Pansy Team",
@@ -14,6 +14,7 @@
   "scripts": {
     "build": "pansy -w",
     "doc:dev": "father-doc dev",
+    "doc:build": "father-doc build",
     "prettier": "walrus prettier",
     "lint": "walrus lint",
     "lint:commit": "walrus commitlint --env HUSKY_GIT_PARAMS",

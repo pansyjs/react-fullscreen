@@ -3,8 +3,12 @@ import screenfull from 'screenfull';
 
 interface FullScreenProps {
   video?: HTMLVideoElement;
+  // 是否全屏
   enabled: boolean;
   children?: ReactNode;
+  // 目标元素
+  target?: HTMLElement;
+  // 全屏关闭回调
   onClose?: (error?: Error) => void;
 }
 
