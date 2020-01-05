@@ -20,6 +20,26 @@ npm install @pansy/react-fullscreen --save
 yarn add  @pansy/react-fullscreen
 ```
 
+## Props
+
+### enabled
+
+- 数据类型: `boolean`
+- 默认值: `false`
+- 描述: 是否全屏
+
+### target
+
+- 数据类型: `HTMLElement`
+- 默认值: 无
+- 描述: 需要控制的目标元素
+
+## onClose
+
+- 数据类型: `function`
+- 默认值: 无
+- 描述: 关闭全屏的回调
+
 ## ⌨️ 本地开发
 
 ```
