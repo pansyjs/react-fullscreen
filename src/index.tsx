@@ -50,7 +50,7 @@ class FullScreen extends React.Component<FullScreenProps> {
 
     if (screenfull.isEnabled) {
       try {
-        screenfull.request(this.root);
+        screenfull.request(this.props.target || this.root);
       } catch (error) {
         onClose && onClose(error);
       }
@@ -106,7 +106,7 @@ class FullScreen extends React.Component<FullScreenProps> {
   };
 
   render() {
-    const { enabled, children } = this.props;
+    const { enabled, children, target } = this.props;
     const className = ['fullscreen'];
 
     if (enabled) {
@@ -117,7 +117,7 @@ class FullScreen extends React.Component<FullScreenProps> {
       <div
         ref={this.saveRoot}
         className={className.join(' ')}
-        style={enabled ? { height: '100%', width: '100%' } : undefined}
+        style={enabled && !target ? { height: '100%', width: '100%' } : undefined}
       >
         {children}
       </div>
