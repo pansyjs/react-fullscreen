@@ -12,7 +12,7 @@ interface FullScreenProps {
   onClose?: (error?: Error) => void;
 }
 
-class FullScreen extends React.Component<FullScreenProps> {
+class FullScreen extends React.PureComponent<FullScreenProps> {
   private root: HTMLDivElement | undefined;
 
   static defaultProps = {
@@ -29,16 +29,15 @@ class FullScreen extends React.Component<FullScreenProps> {
   constructor(props: FullScreenProps) {
     super(props);
     this.root = undefined;
+    this.state = {};
   }
 
   componentDidMount() {
     this.handleScreenfull(this.props);
   }
 
-  componentDidUpdate(nextProps: FullScreenProps) {
-    if (nextProps.enabled !== this.props.enabled) {
-      this.handleScreenfull(nextProps);
-    }
+  componentDidUpdate() {
+    this.handleScreenfull(this.props);
   }
 
   componentWillUnmount() {
