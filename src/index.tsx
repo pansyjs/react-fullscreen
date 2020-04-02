@@ -1,7 +1,10 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, CSSProperties } from 'react';
 import screenfull from 'screenfull';
 
 interface FullScreenProps {
+  prefixCls?: string;
+  className?: string;
+  style?: CSSProperties;
   video?: HTMLVideoElement;
   // 是否全屏
   enabled: boolean;
@@ -16,6 +19,7 @@ class FullScreen extends React.PureComponent<FullScreenProps> {
   private root: HTMLDivElement | undefined;
 
   static defaultProps = {
+    prefixCls: 'pansy-fullscreen',
     enabled: false
   };
 
@@ -105,19 +109,15 @@ class FullScreen extends React.PureComponent<FullScreenProps> {
   };
 
   render() {
-    const { enabled, children, target } = this.props;
-    const className = ['fullscreen'];
+    const { prefixCls, className, enabled, children, style } = this.props;
+    const cls = [className, prefixCls];
 
     if (enabled) {
-      className.push('fullscreen-enabled');
+      cls.push('fullscreen-enabled');
     }
 
     return (
-      <div
-        ref={this.saveRoot}
-        className={className.join(' ')}
-        style={enabled && !target ? { height: '100%', width: '100%' } : undefined}
-      >
+      <div ref={this.saveRoot} className={cls.filter((item) => item).join(' ')} style={style}>
         {children}
       </div>
     );

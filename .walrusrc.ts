@@ -1,9 +1,7 @@
 import { Config } from '@walrus/types';
 
 const config: Config = {
-  plugins: {
-    release: true
-  }
+  plugins: []
 };
 
 export default config;

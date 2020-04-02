@@ -12,13 +12,12 @@
   "author": "Pansy Team",
   "license": "MIT",
   "scripts": {
-    "build": "pansy -w",
-    "doc:dev": "father-doc dev",
+    "build": "pansy",
+    "start": "father-doc dev",
     "doc:build": "father-doc build",
     "prettier": "walrus prettier",
     "lint": "walrus lint",
     "lint:commit": "walrus commitlint --env HUSKY_GIT_PARAMS",
-    "prerelease": "pansy",
     "release": "walrus release"
   },
   "peerDependencies": {
@@ -26,14 +25,15 @@
     "react-dom": ">=16.0.0"
   },
   "dependencies": {
-    "screenfull": "^5.0.0"
+    "screenfull": "^5.0.2"
   },
   "devDependencies": {
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
-    "@walrus/cli": "^0.4.1",
+    "@walrus/cli": "^1.2.0",
     "@walrus/pansy": "^0.3.0",
-    "@walrus/plugin-release": "^1.3.4",
+    "@walrus/plugin-release": "^1.7.0",
+    "@walrus/preset-lint": "^1.1.2",
     "father-doc": "^1.0.0-alpha.12",
     "husky": "^3.1.0",
     "react": "^16.12.0",
