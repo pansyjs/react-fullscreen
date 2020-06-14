@@ -13,8 +13,8 @@
   "license": "MIT",
   "scripts": {
     "build": "pansy",
-    "start": "father-doc dev",
-    "doc:build": "father-doc build",
+    "start": "dumi dev",
+    "doc:build": "dumi build",
     "prettier": "walrus prettier",
     "lint": "walrus lint",
     "lint:commit": "walrus commitlint --env HUSKY_GIT_PARAMS",
@@ -25,7 +25,7 @@
     "react-dom": ">=16.0.0"
   },
   "dependencies": {
-    "screenfull": "^5.0.2"
+    "@pansy/hooks": "^2.0.1"
   },
   "devDependencies": {
     "@types/react": "^16.9.17",
@@ -34,7 +34,7 @@
     "@walrus/pansy": "^0.3.0",
     "@walrus/plugin-release": "^1.7.0",
     "@walrus/preset-lint": "^1.1.2",
-    "father-doc": "^1.0.0-alpha.12",
+    "dumi": "^1.0.31",
     "husky": "^3.1.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",

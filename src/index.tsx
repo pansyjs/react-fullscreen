@@ -1,127 +1,59 @@
-import React, { ReactNode, CSSProperties } from 'react';
-import screenfull from 'screenfull';
+import React, { ReactNode, forwardRef, HTMLAttributes, useEffect, useRef } from 'react';
+import useFullscreen from '@pansy/hooks/es/use-fullscreen';
+import { BasicTarget } from '@pansy/hooks/es/utils/dom';
 
-interface FullScreenProps {
+interface FullscreenProps extends HTMLAttributes<HTMLDivElement> {
   prefixCls?: string;
-  className?: string;
-  style?: CSSProperties;
-  video?: HTMLVideoElement;
-  // 是否全屏
-  enabled: boolean;
+  enabled?: boolean;
   children?: ReactNode;
   // 目标元素
   target?: HTMLElement;
-  // 全屏关闭回调
   onClose?: (error?: Error) => void;
 }
 
-class FullScreen extends React.PureComponent<FullScreenProps> {
-  private root: HTMLDivElement | undefined;
+const Fullscreen = forwardRef<HTMLDivElement, FullscreenProps>((props, ref) => {
+  const { prefixCls, className, enabled = false, target, onClose, children, ...rest } = props;
+  const container = useRef(null);
+  const [, { setFull, exitFull }] = useFullscreen((target || container) as BasicTarget, {
+    onExitFull: onClose
+  });
 
-  static defaultProps = {
-    prefixCls: 'pansy-fullscreen',
-    enabled: false
-  };
-
-  static getDerivedStateFromProps(nextProps: FullScreenProps) {
-    if ('enabled' in nextProps) {
-      return { enabled: nextProps.enabled };
-    }
-    return null;
-  }
-
-  constructor(props: FullScreenProps) {
-    super(props);
-    this.root = undefined;
-    this.state = {};
-  }
-
-  componentDidMount() {
-    this.handleScreenfull(this.props);
-  }
-
-  componentDidUpdate() {
-    this.handleScreenfull(this.props);
-  }
-
-  componentWillUnmount() {
-    this.closeScreenfull(this.props);
-  }
-
-  openScreenfull = (props: FullScreenProps) => {
-    const { onClose, video } = props;
-
-    if (screenfull.isEnabled) {
-      try {
-        screenfull.request(this.props.target || this.root);
-      } catch (error) {
-        onClose && onClose(error);
-      }
-      screenfull.on('change', this.handleChange);
-    } else if (video && video.webkitEnterFullscreen) {
-      video.webkitEnterFullscreen();
-      video.addEventListener('webkitendfullscreen', this.handleWebkitEndFullscreen);
-    } else {
-      onClose && onClose();
-    }
-  };
-
-  closeScreenfull = (props: FullScreenProps) => {
-    const { video } = props;
-
-    if (screenfull.isEnabled) {
-      try {
-        screenfull.off('change', this.handleChange);
-        screenfull.exit();
-      } catch {}
-    } else if (video && video.webkitExitFullscreen) {
-      video.removeEventListener('webkitendfullscreen', this.handleWebkitEndFullscreen);
-      video.webkitExitFullscreen();
-    }
-  };
-
-  handleScreenfull = (props: FullScreenProps) => {
-    if (props.enabled) {
-      this.openScreenfull(props);
-    } else {
-      this.closeScreenfull(props);
-    }
-  };
-
-  handleChange = () => {
-    const { onClose } = this.props;
-
-    if (screenfull.isEnabled && !screenfull.isFullscreen) {
-      onClose && onClose();
-    }
-  };
-
-  handleWebkitEndFullscreen = () => {
-    const { video } = this.props;
-
-    if (video) {
-      video.removeEventListener('webkitendfullscreen', this.handleWebkitEndFullscreen);
-    }
-  };
-
-  saveRoot = (node: HTMLDivElement) => {
-    this.root = node;
-  };
-
-  render() {
-    const { prefixCls, className, enabled, children, style } = this.props;
-    const cls = [className, prefixCls];
-
+  useEffect(() => {
     if (enabled) {
-      cls.push('fullscreen-enabled');
+      setFull();
+    } else {
+      exitFull();
     }
+  }, [props.enabled]);
 
-    return (
-      <div ref={this.saveRoot} className={cls.filter((item) => item).join(' ')} style={style}>
-        {children}
-      </div>
-    );
+  useEffect(() => {
+    if (container.current) {
+      ref = container.current;
+    }
+  }, [container.current]);
+
+  const cls = [className, prefixCls];
+
+  if (enabled) {
+    cls.push(`${prefixCls}-enabled'`);
   }
-}
 
-export default FullScreen;
+  return (
+    <div
+      ref={container}
+      {...rest}
+      className={cls
+        .filter((item) => item)
+        .join(' ')
+        .trim()}
+    >
+      {children}
+    </div>
+  );
+});
+
+Fullscreen.defaultProps = {
+  prefixCls: 'pansy-fullscreen'
+};
+
+export default Fullscreen;

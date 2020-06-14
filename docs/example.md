@@ -1,60 +1,13 @@
----
-title: 示例
----
+# React Fullscreen 全屏
 
-## 简单示例
+全屏整个页面或者某个区域
 
-```jsx
-import React from 'react';
-import FullScreen from '@pansy/react-fullscreen';
+## 代码示例
 
-export default () => {
-  const [isFull, setIsFull] = React.useState(false);
+### 简单使用
 
-  const handleClick = () => {
-    setIsFull(!isFull);
-  };
+<code src="./demo/simple.tsx" />
 
-  const handleCloseFullscreen = () => {
-    setIsFull(false);
-  };
+### 全屏整个页面
 
-  return (
-    <FullScreen enabled={isFull} onClose={handleCloseFullscreen}>
-      <div style={{ background: '#fff', height: '100%', width: '100%' }}>
-        <button onClick={handleClick}>全屏</button>
-      </div>
-    </FullScreen>
-  );
-};
-```
-
-## 全屏整个页面
-
-```jsx
-import React from 'react';
-import FullScreen from '@pansy/react-fullscreen';
-
-export default () => {
-  const [isFull, setIsFull] = React.useState(false);
-
-  const handleClick = () => {
-    setIsFull(!isFull);
-  };
-
-  const handleCloseFullscreen = () => {
-    setIsFull(false);
-  };
-
-  return (
-    <div>
-      <FullScreen
-        enabled={isFull}
-        target={document.documentElement}
-        onClose={handleCloseFullscreen}
-      />
-      <button onClick={handleClick}>全屏</button>
-    </div>
-  );
-};
-```
+<code src="./demo/body.tsx" />
