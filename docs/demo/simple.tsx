@@ -1,23 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 // @ts-ignore
 import Fullscreen from '@pansy/react-fullscreen';
+import './styles.less';
 
 export default () => {
-  const [isFull, setIsFull] = React.useState(false);
+  const [enabled, setEnabled] = useState(false);
 
   const handleClick = () => {
-    setIsFull(!isFull);
+    setEnabled(!enabled);
   };
 
   const handleCloseFullscreen = () => {
-    setIsFull(false);
+    setEnabled(false);
   };
 
   return (
-    <Fullscreen enabled={isFull} onClose={handleCloseFullscreen}>
-      <div style={{ background: '#fff', height: '100%', width: '100%' }}>
-        <button onClick={handleClick}>全屏</button>
-      </div>
+    <Fullscreen enabled={enabled} onClose={handleCloseFullscreen}>
+      <button onClick={handleClick}>全屏</button>
     </Fullscreen>
   );
 };
