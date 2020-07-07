@@ -35,7 +35,7 @@ const Fullscreen = forwardRef<HTMLDivElement, FullscreenProps>((props, ref) => {
   const cls = [className, prefixCls];
 
   if (enabled) {
-    cls.push(`${prefixCls}-enabled'`);
+    cls.push(`${prefixCls}-enabled`);
   }
 
   return (
