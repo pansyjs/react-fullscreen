@@ -13,7 +13,8 @@ interface FullscreenProps extends HTMLAttributes<HTMLDivElement> {
 
 const Fullscreen = forwardRef<HTMLDivElement, FullscreenProps>((props, ref) => {
   const { prefixCls, className, enabled = false, target, onClose, children, ...rest } = props;
-  const container = useRef(null);
+
+  const container = ref || useRef(null);
   const [, { setFull, exitFull }] = useFullscreen((target || container) as BasicTarget, {
     onExitFull: onClose
   });
@@ -25,12 +26,6 @@ const Fullscreen = forwardRef<HTMLDivElement, FullscreenProps>((props, ref) => {
       exitFull();
     }
   }, [props.enabled]);
-
-  useEffect(() => {
-    if (container.current) {
-      ref = container.current;
-    }
-  }, [container.current]);
 
   const cls = [className, prefixCls];
 
