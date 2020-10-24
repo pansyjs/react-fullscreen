@@ -2,7 +2,7 @@ import React, { ReactNode, forwardRef, HTMLAttributes, useEffect, useRef } from 
 import useFullscreen from '@pansy/hooks/es/use-fullscreen';
 import { BasicTarget } from '@pansy/hooks/es/utils/dom';
 
-interface FullscreenProps extends HTMLAttributes<HTMLDivElement> {
+export interface FullscreenProps extends HTMLAttributes<HTMLDivElement> {
   prefixCls?: string;
   enabled?: boolean;
   children?: ReactNode;
