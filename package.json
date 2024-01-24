@@ -1,6 +1,6 @@
 {
   "name": "@pansy/react-fullscreen",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "react fullscreen component",
   "main": "lib/index.js",
   "module": "es/index.esm.js",
