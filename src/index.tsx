@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect, useRef } from 'react';
 import classNames from '@pansy/classnames';
 import { useFullscreen } from '@pansy/react-hooks';
 
-interface FullscreenProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FullscreenProps extends React.HTMLAttributes<HTMLDivElement> {
   prefixCls?: string;
   className?: string;
   enabled?: boolean;
@@ -38,7 +38,7 @@ const Fullscreen = forwardRef<HTMLDivElement, FullscreenProps>((props, ref) => {
       ref={container}
       {...rest}
       className={classNames(className, prefixCls, {
-        [`${prefixCls}-enabled'`]: enabled
+        [`${prefixCls}-enabled`]: enabled
       })}
     >
       {children}
