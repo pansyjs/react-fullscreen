@@ -26,6 +26,13 @@
     "@pansy/react-hooks": "^2.4.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^18.4.4",
+    "@commitlint/config-conventional": "^18.4.4",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^9.2.6",
+    "@semantic-release/npm": "^11.0.2",
+    "@semantic-release/release-notes-generator": "^12.1.0",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "dumi": "^2.0.0",
@@ -33,6 +40,7 @@
     "husky": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "semantic-release": "^23.0.0",
     "typescript": "^5.3.3"
   },
   "publishConfig": {
