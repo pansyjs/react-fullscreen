@@ -3,48 +3,37 @@
   "version": "1.2.0",
   "description": "react fullscreen component",
   "main": "lib/index.js",
-  "module": "lib/index.esm.js",
-  "types": "lib/index.d.ts",
+  "module": "es/index.esm.js",
+  "types": "es/index.d.ts",
   "files": [
+    "es",
     "lib"
   ],
   "repository": "git@github.com:pansyjs/react-fullscreen.git",
   "author": "Pansy Team",
   "license": "MIT",
   "scripts": {
-    "build": "pansy",
+    "build": "father build",
     "start": "dumi dev",
-    "doc:build": "dumi build",
-    "prettier": "walrus prettier",
-    "lint": "walrus lint",
-    "lint:commit": "walrus commitlint --env HUSKY_GIT_PARAMS",
-    "release": "walrus release"
+    "doc:build": "dumi build"
   },
   "peerDependencies": {
-    "react": ">=16.0.0",
-    "react-dom": ">=16.0.0"
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
   },
   "dependencies": {
-    "@pansy/hooks": "^2.0.1"
+    "@pansy/classnames": "^1.0.1",
+    "@pansy/react-hooks": "^2.4.0"
   },
   "devDependencies": {
-    "@types/react": "^16.9.17",
-    "@types/react-dom": "^16.9.4",
-    "@walrus/cli": "^1.3.0",
-    "@walrus/pansy": "^0.3.0",
-    "@walrus/plugin-release": "^1.8.0",
-    "@walrus/preset-lint": "^1.1.5",
-    "dumi": "^1.0.31",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "dumi": "^2.0.0",
+    "father": "^4.3.8",
     "husky": "^3.1.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "typescript": "^3.9.5"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn prettier",
-      "commit-msg": "yarn lint:commit"
-    }
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.3.3"
   },
   "publishConfig": {
     "access": "public"

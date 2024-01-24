@@ -1,11 +1,12 @@
-import React, { ReactNode, forwardRef, HTMLAttributes, useEffect, useRef } from 'react';
-import useFullscreen from '@pansy/hooks/es/use-fullscreen';
-import { BasicTarget } from '@pansy/hooks/es/utils/dom';
+import React, { forwardRef, useEffect, useRef } from 'react';
+import classNames from '@pansy/classnames';
+import { useFullscreen } from '@pansy/react-hooks';
 
-interface FullscreenProps extends HTMLAttributes<HTMLDivElement> {
+interface FullscreenProps extends React.HTMLAttributes<HTMLDivElement> {
   prefixCls?: string;
+  className?: string;
   enabled?: boolean;
-  children?: ReactNode;
+  children?: React.ReactNode;
   // 目标元素
   target?: HTMLElement;
   onClose?: (error?: Error) => void;
@@ -14,7 +15,7 @@ interface FullscreenProps extends HTMLAttributes<HTMLDivElement> {
 const Fullscreen = forwardRef<HTMLDivElement, FullscreenProps>((props, ref) => {
   const { prefixCls, className, enabled = false, target, onClose, children, ...rest } = props;
   const container = useRef(null);
-  const [, { setFull, exitFull }] = useFullscreen((target || container) as BasicTarget, {
+  const [, { setFull, exitFull }] = useFullscreen((target || container), {
     onExitFull: onClose
   });
 
@@ -32,20 +33,13 @@ const Fullscreen = forwardRef<HTMLDivElement, FullscreenProps>((props, ref) => {
     }
   }, [container.current]);
 
-  const cls = [className, prefixCls];
-
-  if (enabled) {
-    cls.push(`${prefixCls}-enabled'`);
-  }
-
   return (
     <div
       ref={container}
       {...rest}
-      className={cls
-        .filter((item) => item)
-        .join(' ')
-        .trim()}
+      className={classNames(className, prefixCls, {
+        [`${prefixCls}-enabled'`]: enabled
+      })}
     >
       {children}
     </div>
